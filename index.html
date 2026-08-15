@@ -3,304 +3,558 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="author" content="ThanhtaEdu">
-<title>ThanhtaEdu TEST | index.html → H5P trực tiếp</title>
+<title>ThanhtaEdu · HTML + Media → H5P</title>
 <style>
 :root{
-  --bg:#f6f7fb; --card:#fff; --text:#172033; --muted:#6b7280;
-  --p1:#4f46e5; --p2:#7c3aed; --line:#e5e7eb; --ok:#059669; --err:#dc2626;
+  --green:#22a06b;--blue:#2878c8;--purple:#6d5dfc;--ink:#1f2937;
+  --muted:#667085;--line:#dbe7f3;--bg:#f4f7fb;--paper:#fff;
 }
 *{box-sizing:border-box}
-body{
-  margin:0;
-  font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-  background:
-    radial-gradient(circle at 15% 10%,rgba(99,102,241,.10),transparent 30%),
-    radial-gradient(circle at 85% 12%,rgba(168,85,247,.10),transparent 32%),
-    var(--bg);
-  color:var(--text)
+html,body{margin:0;min-height:100%;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--ink)}
+body{padding:22px}
+.wrap{width:min(980px,100%);margin:auto}
+.brand{display:flex;align-items:center;gap:11px;margin-bottom:16px}
+.logo{width:42px;height:42px;border-radius:12px;background:#27b6a2;display:grid;place-items:center;font-size:22px}
+.brandname{font-size:22px;font-weight:800}
+.brandname .a{color:#168c78} .brandname .b{color:#2466d1}
+.hero{
+  border-radius:20px;padding:26px 28px;color:#fff;
+  background:linear-gradient(135deg,#3435a8 0%,#5045e6 55%,#7c35f2 100%);
+  box-shadow:0 16px 38px rgba(87,73,210,.18)
 }
-.wrap{max-width:900px;margin:0 auto;padding:28px 18px 44px}
-.top-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;padding:4px 2px}
-.brand{display:flex;align-items:center;gap:12px;font-weight:900;font-size:24px;color:#158a78}
-.brand-logo{width:42px;height:42px;border-radius:13px;display:grid;place-items:center;background:linear-gradient(135deg,#14b8a6,#0f8f7f);color:#fff;font-size:22px}
-.brand-name .edu{color:#2563eb}
-.test-pill{padding:7px 10px;border-radius:999px;background:#fff7ed;border:1px solid #fed7aa;color:#9a3412;font-size:12px;font-weight:900}
-.hero{background:linear-gradient(135deg,#252a67,#4f46e5 52%,#7c3aed);color:white;border-radius:28px;padding:28px;box-shadow:0 22px 55px rgba(79,70,229,.18)}
-.hero h1{margin:0;font-size:32px}
-.hero p{margin:10px 0 0;opacity:.92;line-height:1.5}
-.badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
-.badge{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.16);padding:7px 10px;border-radius:999px;font-size:12px;font-weight:700}
-.card{margin-top:18px;background:var(--card);border:1px solid var(--line);border-radius:22px;padding:22px;box-shadow:0 12px 35px rgba(15,23,42,.05)}
-.field{margin-top:14px}.field:first-child{margin-top:0}
-.field label{display:block;font-size:12px;font-weight:800;color:#475569;margin-bottom:7px}
-.field input{width:100%;border:1px solid var(--line);border-radius:12px;padding:12px 13px;font:inherit;outline:none;background:#fff}
-.field input:focus{border-color:#a5b4fc;box-shadow:0 0 0 3px rgba(99,102,241,.10)}
-.filebox{border:2px dashed #c7d2fe;border-radius:16px;padding:18px;background:#f8faff}
-.filebox input{border:0;padding:0;background:transparent}
-.note{margin-top:12px;padding:12px 14px;border-radius:13px;background:#fff7ed;border:1px solid #fed7aa;color:#9a3412;font-size:12px;line-height:1.5}
-.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
-.btn{border:0;border-radius:13px;padding:12px 16px;font-weight:900;cursor:pointer}
-.btn.primary{background:linear-gradient(135deg,var(--p1),var(--p2));color:#fff}
-.btn:disabled{opacity:.45;cursor:not-allowed}
-.status{margin-top:16px;border-radius:14px;padding:13px 14px;background:#f8fafc;border:1px solid var(--line);font-size:13px;line-height:1.5;white-space:pre-wrap}
-.status.ok{background:#ecfdf5;border-color:#a7f3d0;color:#065f46}
-.status.err{background:#fef2f2;border-color:#fecaca;color:#991b1b}
-footer{text-align:center;color:#8a94a6;font-size:12px;margin-top:18px}
+.hero h1{margin:0;text-align:center;font-size:30px}
+.badges{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-top:16px}
+.badge{background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.22);border-radius:999px;padding:7px 11px;font-size:13px;font-weight:700}
+.card{margin-top:18px;background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:22px;box-shadow:0 12px 30px rgba(20,62,100,.08)}
+.mode{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.box{border:2px dashed #b9d5ee;border-radius:16px;padding:22px;text-align:center;background:#fbfdff}
+.box strong{display:block;color:#185f9b;font-size:18px;margin-bottom:7px}
+.box p{margin:0 0 14px;color:var(--muted);font-size:14px;line-height:1.45}
+input[type=file]{max-width:100%}
+.row{display:grid;grid-template-columns:1fr auto;gap:12px;margin-top:16px;align-items:end}
+label{display:block;font-weight:700;margin-bottom:7px;color:#344054}
+input[type=text]{width:100%;padding:12px 13px;border:1px solid #bed0e1;border-radius:10px;font-size:16px}
+button{border:0;border-radius:10px;padding:12px 18px;font-size:15px;font-weight:800;cursor:pointer}
+button.primary{background:var(--blue);color:#fff}
+button:disabled{opacity:.45;cursor:not-allowed}
+.files{margin-top:18px;border:1px solid #e1eaf2;border-radius:12px;overflow:hidden}
+.files-head{background:#f5f9fd;padding:10px 12px;font-weight:800;color:#41607a}
+.list{max-height:250px;overflow:auto}
+.item{display:grid;grid-template-columns:1fr auto;gap:12px;padding:9px 12px;border-top:1px solid #edf2f7;font-size:13px}
+.item span:last-child{color:#6d7f90}
+.status{margin-top:16px;padding:12px 14px;border-radius:10px;background:#eef7ff;border:1px solid #cae2f8;color:#205f96;line-height:1.45}
+.status.ok{background:#eefaf5;border-color:#c9eadc;color:#126849}
+.status.err{background:#fff2f2;border-color:#efc9c9;color:#9d3030}
+.status.warn{background:#fff8e8;border-color:#f0d596;color:#805b00}
+.note{margin-top:14px;font-size:13px;color:#6c7d8c;line-height:1.5}
+footer{text-align:center;color:#7d8b98;font-size:12px;padding:18px 0}
+@media(max-width:720px){body{padding:10px}.mode{grid-template-columns:1fr}.row{grid-template-columns:1fr}.hero h1{font-size:24px}}
 </style>
 </head>
 <body>
 <div class="wrap">
-  <header class="top-header">
-    <div class="brand">
-      <div class="brand-logo">🎓</div>
-      <div class="brand-name">Thanhta<span class="edu">Edu</span></div>
-    </div>
-    
-  </header>
+  <div class="brand">
+    <div class="logo">🎓</div>
+    <div class="brandname"><span class="a">Thanhta</span><span class="b">Edu</span></div>
+  </div>
 
-  <section class="hero">
+  <div class="hero">
     <h1>HTML → H5P Converter</h1>
-    
     <div class="badges">
-      <span class="badge">🇻🇳 Giao diện tiếng Việt</span>
-      <span class="badge">📄 Tải file index.html</span>
-      <span class="badge">📦 Xuất .h5p</span>
+      <span class="badge">📄 Tải file HTML</span>
+      <span class="badge">🎬 Tải file HTML + Video</span>
+      <span class="badge">🇻🇳 Hỗ trợ tiếng Việt</span>
     </div>
-  </section>
+  </div>
 
-  <section class="card">
-    <div class="field">
-      <label>Tiêu đề bài học</label>
-      <input id="title" value="Bài học tương tác">
+  <div class="card">
+    <div class="mode">
+      <div class="box">
+        <strong>1. Chọn file HTML</strong>
+        <p>Chọn <b>index.html</b> hoặc <b>index.htm</b>. Nếu bài không có media ngoài thì chỉ cần bước này.</p>
+        <input id="htmlInput" type="file" accept=".html,.htm">
+      </div>
+
+      <div class="box">
+        <strong>2. Video / tài nguyên (nếu có)</strong>
+        <p>Nếu bài chỉ có 1 file <b>index.html / index.htm</b> thì bỏ qua bước này.</p>
+        <input id="assetInput" type="file" multiple
+          accept=".mp4,.webm,.ogg,.mp3,.m4a,.wav,.png,.jpg,.jpeg,.gif,.bmp,.tif,.tiff,.svg,.webp,.vtt,.webvtt,.css,.js">
+      </div>
     </div>
 
-    <div class="field filebox">
-      <label>Chọn file index.html</label>
-      <input id="htmlFile" type="file" accept=".html,.htm,text/html">
-    </div>
-<div class="actions">
-      <button id="build" class="btn primary" disabled>⬇ Tạo file H5P TEST</button>
+    <div class="row">
+      <div>
+        <label for="title">Tiêu đề bài học</label>
+        <input id="title" type="text" value="BÀI HỌC TƯƠNG TÁC">
+      </div>
+      <button id="buildBtn" class="primary" disabled>TẠO FILE H5P</button>
     </div>
 
-    <div id="status" class="status">Chưa chọn file.</div>
-  </section>
+    <div id="filesBox" class="files" style="display:none">
+      <div class="files-head">Kiểm tra tệp trước khi đóng gói</div>
+      <div id="fileList" class="list"></div>
+    </div>
 
-  <footer>ThanhtaEdu - maithanhta77@gamail.com</footer>
+    <div id="status" class="status">Chưa tải file...</div>
+
+    <div class="note">
+      Có thể chuyển <b>HTML duy nhất</b> hoặc <b>HTML + media</b>. Nếu HTML có gọi video/ảnh/audio bên ngoài,
+      app sẽ yêu cầu chọn đúng tệp trước khi tạo H5P.
+    </div>
+  </div>
+
+  <footer>ThanhtaEdu · maithanhta77@gmail.com</footer>
 </div>
 
 <script>
+"use strict";
+
 const $ = s => document.querySelector(s);
-let selectedText = "";
-let selectedName = "";
+const state = { htmlFile:null, assets:new Map(), refs:[] };
 
-function setStatus(msg,type=""){
-  const s=$("#status");
-  s.className="status"+(type?" "+type:"");
-  s.textContent=msg;
+const allowedAsset = /\.(mp4|webm|ogg|mp3|m4a|wav|png|jpe?g|gif|bmp|tiff?|svg|webp|vtt|webvtt|css|js)$/i;
+
+function normalizePath(p){
+  return String(p||"")
+    .normalize("NFC")
+    .trim()
+    .replace(/\\/g,"/")
+    .replace(/^\.\//,"")
+    .replace(/^\/+/,"");
 }
 
-function utf8ToBase64(str){
-  const bytes = new TextEncoder().encode(str);
-  let binary = "";
-  const chunk = 0x8000;
-  for(let i=0;i<bytes.length;i+=chunk){
-    binary += String.fromCharCode(...bytes.subarray(i,i+chunk));
+function basename(p){
+  const s=normalizePath(p).split("/");
+  return s[s.length-1]||"";
+}
+
+function escapeHtml(s){
+  return String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));
+}
+
+function prettySize(n){
+  if(n<1024) return n+" B";
+  if(n<1024*1024) return (n/1024).toFixed(1)+" KB";
+  return (n/1024/1024).toFixed(1)+" MB";
+}
+
+function setStatus(msg, kind=""){
+  const el=$("#status");
+  el.className="status"+(kind?" "+kind:"");
+  el.innerHTML=msg;
+}
+
+function safeTitle(s){
+  return (s||"bai_hoc")
+    .normalize("NFD").replace(/[\u0300-\u036f]/g,"")
+    .replace(/đ/g,"d").replace(/Đ/g,"D")
+    .replace(/[^\w.-]+/g,"_")
+    .replace(/^_+|_+$/g,"") || "bai_hoc";
+}
+
+function extOf(name){
+  const m=/(\.[A-Za-z0-9]+)$/.exec(name||"");
+  return m ? m[1].toLowerCase() : "";
+}
+
+function mimeOf(file){
+  if(file.type) return file.type;
+  const ext=extOf(file.name);
+  const map={
+    ".mp4":"video/mp4",".webm":"video/webm",".ogg":"video/ogg",
+    ".mp3":"audio/mpeg",".m4a":"audio/mp4",".wav":"audio/wav",
+    ".png":"image/png",".jpg":"image/jpeg",".jpeg":"image/jpeg",
+    ".gif":"image/gif",".svg":"image/svg+xml",".webp":"image/webp",
+    ".vtt":"text/vtt",".webvtt":"text/vtt",".css":"text/css",".js":"text/javascript"
+  };
+  return map[ext] || "application/octet-stream";
+}
+
+function findRelativeRefs(html){
+  const refs=new Set();
+  let m;
+
+  const attr=/\b(?:src|href|poster)\s*=\s*["']([^"']+)["']/gi;
+  while((m=attr.exec(html))){
+    const p=normalizePath(m[1]);
+    if(!p || /^(?:https?:|data:|blob:|#|javascript:|mailto:|tel:)/i.test(p)) continue;
+    if(allowedAsset.test(p)) refs.add(p);
   }
-  return btoa(binary);
+
+  const css=/url\(\s*["']?([^"')]+)["']?\s*\)/gi;
+  while((m=css.exec(html))){
+    const p=normalizePath(m[1]);
+    if(!p || /^(?:https?:|data:|blob:)/i.test(p)) continue;
+    if(allowedAsset.test(p)) refs.add(p);
+  }
+
+  return [...refs];
 }
 
-$("#htmlFile").addEventListener("change", async (e)=>{
-  const f=e.target.files && e.target.files[0];
-  selectedText=""; selectedName="";
-  $("#build").disabled=true;
-  if(!f){setStatus("Chưa chọn file.");return;}
-  if(!/\.html?$/i.test(f.name)){setStatus("Vui lòng chọn file .html hoặc .htm.","err");return;}
-  try{
-    selectedText=await f.text();
-    selectedName=f.name;
-    if(!/<html[\s>]/i.test(selectedText) && !/<!doctype\s+html/i.test(selectedText)){
-      setStatus("File đã đọc nhưng không nhận thấy cấu trúc HTML chuẩn.","err");
-      return;
+function findAssetForRef(ref){
+  ref=normalizePath(ref);
+  if(state.assets.has(ref)) return state.assets.get(ref);
+
+  const b=basename(ref);
+  for(const [key,file] of state.assets){
+    if(basename(key)===b) return file;
+  }
+  return null;
+}
+
+async function inspect(){
+  state.refs=[];
+  if(!state.htmlFile){ updateUI(); return; }
+  const html=await state.htmlFile.text();
+  state.refs=findRelativeRefs(html);
+  updateUI();
+}
+
+function updateUI(){
+  const rows=[];
+
+  if(state.htmlFile){
+    rows.push({left:"✓ HTML: "+state.htmlFile.name,right:prettySize(state.htmlFile.size)});
+  }
+
+  const missing=[];
+  for(const ref of state.refs){
+    const file=findAssetForRef(ref);
+    if(file){
+      rows.push({left:"✓ HTML gọi: "+ref,right:prettySize(file.size)});
+    }else{
+      rows.push({left:"⚠ Thiếu: "+ref,right:""});
+      missing.push(ref);
     }
-    $("#build").disabled=false;
-    setStatus(`Đã đọc: ${f.name}\nDung lượng: ${(f.size/1024).toFixed(1)} KB\nSẵn sàng tạo H5P TEST.`,"ok");
-  }catch(err){
-    setStatus("Không đọc được file: "+err.message,"err");
   }
+
+  for(const [name,file] of state.assets){
+    const used=state.refs.some(r=>{
+      const f=findAssetForRef(r);
+      return f===file;
+    });
+    if(!used){
+      rows.push({left:"✓ Tài nguyên thêm: "+name,right:prettySize(file.size)});
+    }
+  }
+
+  $("#filesBox").style.display = rows.length ? "block" : "none";
+  $("#fileList").innerHTML = rows.map(x =>
+    `<div class="item"><span>${escapeHtml(x.left)}</span><span>${escapeHtml(x.right)}</span></div>`
+  ).join("");
+
+  $("#buildBtn").disabled = !state.htmlFile || missing.length>0;
+
+  if(!state.htmlFile){
+    setStatus("Chưa tải file...");
+  }else if(missing.length){
+    setStatus("HTML đang gọi <b>"+missing.map(escapeHtml).join(", ")+"</b> nhưng chưa chọn đúng tệp tương ứng.","warn");
+  }else{
+    if(state.refs.length===0){
+      setStatus("HTML không gọi tài nguyên ngoài. Có thể tạo H5P chỉ với file HTML.","ok");
+    }else{
+      setStatus("Đã tải file. Bấm TẠO FILE H5P để chuyển đổi.","ok");
+    }
+  }
+}
+
+$("#htmlInput").addEventListener("change", e=>{
+  state.htmlFile=e.target.files[0]||null;
+  if(state.htmlFile && !$("#title").value.trim()){
+    $("#title").value=state.htmlFile.name.replace(/\.html?$/i,"");
+  }
+  inspect();
 });
 
-/* ZIP writer - không dùng CDN */
-const crcTable=(()=>{
-  let c,t=[];
+$("#assetInput").addEventListener("change", e=>{
+  state.assets.clear();
+  for(const f of e.target.files){
+    if(allowedAsset.test(f.name)){
+      state.assets.set(normalizePath(f.name),f);
+    }
+  }
+  inspect();
+});
+
+/* ---------- ZIP writer ---------- */
+function u16(n){return new Uint8Array([n&255,(n>>>8)&255]);}
+function u32(n){return new Uint8Array([n&255,(n>>>8)&255,(n>>>16)&255,(n>>>24)&255]);}
+function concat(parts){
+  const len=parts.reduce((s,p)=>s+p.length,0), out=new Uint8Array(len);
+  let o=0; for(const p of parts){out.set(p,o);o+=p.length;} return out;
+}
+const CRC_TABLE=(()=>{
+  const t=new Uint32Array(256);
   for(let n=0;n<256;n++){
-    c=n;
+    let c=n;
     for(let k=0;k<8;k++) c=(c&1)?(0xEDB88320^(c>>>1)):(c>>>1);
     t[n]=c>>>0;
   }
   return t;
 })();
 function crc32(bytes){
-  let c=0xffffffff;
-  for(let i=0;i<bytes.length;i++) c=crcTable[(c^bytes[i])&255]^(c>>>8);
-  return(c^0xffffffff)>>>0;
+  let c=0xFFFFFFFF;
+  for(const b of bytes) c=CRC_TABLE[(c^b)&255]^(c>>>8);
+  return (c^0xFFFFFFFF)>>>0;
 }
-const u16=n=>new Uint8Array([n&255,(n>>>8)&255]);
-const u32=n=>new Uint8Array([n&255,(n>>>8)&255,(n>>>16)&255,(n>>>24)&255]);
-function concat(parts){
-  const len=parts.reduce((a,b)=>a+b.length,0),out=new Uint8Array(len);
-  let p=0; for(const x of parts){out.set(x,p);p+=x.length} return out;
-}
-function dos(d=new Date()){
-  return [
-    ((d.getHours()&31)<<11)|((d.getMinutes()&63)<<5)|(Math.floor(d.getSeconds()/2)&31),
-    (((d.getFullYear()-1980)&127)<<9)|(((d.getMonth()+1)&15)<<5)|(d.getDate()&31)
-  ];
-}
-function makeZip(files){
-  const enc=new TextEncoder(),locals=[],centrals=[]; let offset=0; const [tm,dt]=dos();
-  for(const f of files){
-    const name=enc.encode(f.name);
-    const data = f.bytes ? f.bytes : enc.encode(f.data);
-    const crc=crc32(data),flag=0x0800;
+async function makeZip(entries){
+  const locals=[],centrals=[];let offset=0;
+  for(const ent of entries){
+    const nameBytes=new TextEncoder().encode(ent.name);
+    const data=ent.bytes instanceof Uint8Array ? ent.bytes : new Uint8Array(ent.bytes);
+    const crc=crc32(data);
     const local=concat([
-      u32(0x04034b50),u16(20),u16(flag),u16(0),u16(tm),u16(dt),
-      u32(crc),u32(data.length),u32(data.length),u16(name.length),u16(0),name,data
+      u32(0x04034b50),u16(20),u16(0x0800),u16(0),u16(0),u16(0),
+      u32(crc),u32(data.length),u32(data.length),u16(nameBytes.length),u16(0),
+      nameBytes,data
     ]);
     locals.push(local);
     const central=concat([
-      u32(0x02014b50),u16(20),u16(20),u16(flag),u16(0),u16(tm),u16(dt),
-      u32(crc),u32(data.length),u32(data.length),u16(name.length),u16(0),
-      u16(0),u16(0),u16(0),u32(0),u32(offset),name
+      u32(0x02014b50),u16(20),u16(20),u16(0x0800),u16(0),u16(0),u16(0),
+      u32(crc),u32(data.length),u32(data.length),u16(nameBytes.length),u16(0),
+      u16(0),u16(0),u16(0),u32(0),u32(offset),nameBytes
     ]);
-    centrals.push(central); offset+=local.length;
+    centrals.push(central);
+    offset+=local.length;
   }
-  const localData=concat(locals),centralData=concat(centrals);
+  const centralData=concat(centrals);
   const end=concat([
-    u32(0x06054b50),u16(0),u16(0),u16(files.length),u16(files.length),
-    u32(centralData.length),u32(localData.length),u16(0)
+    u32(0x06054b50),u16(0),u16(0),u16(entries.length),u16(entries.length),
+    u32(centralData.length),u32(offset),u16(0)
   ]);
-  return new Blob([localData,centralData,end],{type:"application/zip"});
+  return new Blob([...locals,centralData,end],{type:"application/zip"});
 }
-function safeName(s){
-  return (s||"bai_hoc").replace(/[\\/:*?"<>|]+/g,"_").replace(/\s+/g,"_").slice(0,90);
+function downloadBlob(blob,name){
+  const a=document.createElement("a");
+  a.href=URL.createObjectURL(blob);
+  a.download=name;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  setTimeout(()=>URL.revokeObjectURL(a.href),1500);
 }
 
-$("#build").addEventListener("click",()=>{
-  if(!selectedText){setStatus("Chưa có file HTML để đóng gói.","err");return;}
+function utf8ToBase64(str){
+  const bytes=new TextEncoder().encode(str);
+  let bin="",chunk=0x8000;
+  for(let i=0;i<bytes.length;i+=chunk){
+    bin+=String.fromCharCode(...bytes.subarray(i,i+chunk));
+  }
+  return btoa(bin);
+}
 
-  const title=$("#title").value.trim()||"Bài học tương tác";
-  const htmlBase64=utf8ToBase64(selectedText);
+/* ---------- H5P library ---------- */
+const libraryJson={
+  title:"Thanhta HTML Media File",
+  description:"Runs HTML interactive lessons and stores media using official H5P file fields.",
+  majorVersion:1,minorVersion:0,patchVersion:0,runnable:1,
+  author:"ThanhtaEdu",license:"MIT",
+  machineName:"H5P.ThanhtaHtmlMediaFile",
+  preloadedJs:[{path:"runner.js"}],
+  preloadedCss:[{path:"runner.css"}]
+};
 
-  const h5p={
-    title,
-    language:"vi",
-    mainLibrary:"H5P.ThanhtaHtml",
-    embedTypes:["div"],
-    license:"U",
-    authors:[{name:"ThanhtaEdu",role:"Author"}],
-    preloadedDependencies:[
-      {machineName:"H5P.ThanhtaHtml",majorVersion:1,minorVersion:0}
-    ]
-  };
+const semanticsJson=[
+  {name:"title",type:"text",label:"Tiêu đề"},
+  {name:"htmlBase64",type:"text",label:"HTML Base64"},
+  {
+    name:"assets",
+    type:"list",
+    label:"Tài nguyên",
+    field:{
+      name:"asset",
+      type:"group",
+      label:"Tài nguyên",
+      fields:[
+        {name:"originalPath",type:"text",label:"Đường dẫn gốc"},
+        {name:"file",type:"file",label:"Tệp",optional:false}
+      ]
+    }
+  }
+];
 
-  const content={
-    title,
-    htmlBase64
-  };
-
-  const library={
-    title:"Thanhta HTML Package",
-    description:"Experimental self-contained HTML runner for ThanhtaEdu",
-    majorVersion:1,
-    minorVersion:0,
-    patchVersion:0,
-    runnable:1,
-    author:"ThanhtaEdu",
-    license:"MIT",
-    machineName:"H5P.ThanhtaHtml",
-    preloadedJs:[{path:"thanhta-html.js"}],
-    preloadedCss:[{path:"thanhta-html.css"}]
-  };
-
-  const semantics=[
-    {name:"title",type:"text",label:"Title",optional:true},
-    {name:"htmlBase64",type:"text",label:"HTML Base64",importance:"high"}
-  ];
-
-  const runner=`(function(){
+const runnerJs=`(function(){
 "use strict";
-var decodeUtf8Base64=function(b64){
+
+function decodeUtf8Base64(b64){
   try{
     var bin=atob(b64||"");
     var bytes=new Uint8Array(bin.length);
-    for(var i=0;i<bin.length;i++) bytes[i]=bin.charCodeAt(i);
+    for(var i=0;i<bin.length;i++)bytes[i]=bin.charCodeAt(i);
     return new TextDecoder("utf-8").decode(bytes);
   }catch(e){
-    return "<!doctype html><html><body><pre>Không giải mã được HTML: "+String(e)+"</pre></body></html>";
+    return "<!doctype html><html><body><pre>"+String(e)+"</pre></body></html>";
   }
-};
+}
 
-H5P.ThanhtaHtml=function(params,contentId){
+function normalizePath(p){
+  try{return String(p||"").normalize("NFC").trim().replace(/\\\\/g,"/").replace(/^\\.\\//,"").replace(/^\\/+/,"");}
+  catch(e){return String(p||"").trim().replace(/\\\\/g,"/").replace(/^\\.\\//,"").replace(/^\\/+/,"");}
+}
+
+function replaceRef(html,originalPath,url){
+  var p=normalizePath(originalPath);
+  var variants=[p];
+  if(p.indexOf("./")!==0) variants.push("./"+p);
+
+  variants.forEach(function(v){
+    html=html.split('"'+v+'"').join('"'+url+'"');
+    html=html.split("'"+v+"'").join("'"+url+"'");
+    html=html.split("url("+v+")").join('url("'+url+'")');
+    html=html.split('url("'+v+'")').join('url("'+url+'")');
+    html=html.split("url('"+v+"')").join("url('"+url+"')");
+  });
+
+  return html;
+}
+
+H5P.ThanhtaHtmlMediaFile=function(params,contentId){
   H5P.EventDispatcher.call(this);
   this.params=params||{};
   this.contentId=contentId;
 };
-H5P.ThanhtaHtml.prototype=Object.create(H5P.EventDispatcher.prototype);
-H5P.ThanhtaHtml.prototype.constructor=H5P.ThanhtaHtml;
 
-H5P.ThanhtaHtml.prototype.attach=function($container){
+H5P.ThanhtaHtmlMediaFile.prototype=Object.create(H5P.EventDispatcher.prototype);
+H5P.ThanhtaHtmlMediaFile.prototype.constructor=H5P.ThanhtaHtmlMediaFile;
+
+H5P.ThanhtaHtmlMediaFile.prototype.attach=function($container){
   var self=this;
-  $container.addClass("h5p-thanhta-html");
+  var html=decodeUtf8Base64(this.params.htmlBase64||"");
+  var assets=this.params.assets||[];
+
+  assets.forEach(function(asset){
+    if(!asset || !asset.originalPath || !asset.file || !asset.file.path)return;
+    var url=H5P.getPath(asset.file.path,self.contentId);
+    html=replaceRef(html,asset.originalPath,url);
+  });
+
   var iframe=document.createElement("iframe");
-  iframe.className="thanhta-html-frame";
+  iframe.className="thanhta-media-file-frame";
   iframe.setAttribute("frameborder","0");
   iframe.setAttribute("scrolling","auto");
   iframe.setAttribute("allow","autoplay; fullscreen; microphone; camera; clipboard-read; clipboard-write");
   iframe.setAttribute("allowfullscreen","");
   iframe.title=this.params.title||"Bài học tương tác";
-  $container.get(0).appendChild(iframe);
+  $container.addClass("h5p-thanhta-media-file").get(0).appendChild(iframe);
 
-  var html=decodeUtf8Base64(this.params.htmlBase64||"");
   iframe.srcdoc=html;
 
-  var notifyResize=function(){
-    try{ self.trigger("resize"); }catch(e){}
-    try{
-      if(window.H5P && H5P.externalDispatcher){
-        H5P.externalDispatcher.trigger("resize");
-      }
-    }catch(e){}
-  };
+  function resize(){
+    try{self.trigger("resize");}catch(e){}
+    try{if(H5P.externalDispatcher)H5P.externalDispatcher.trigger("resize");}catch(e){}
+  }
+
   iframe.addEventListener("load",function(){
-    notifyResize();
-    setTimeout(notifyResize,200);
-    setTimeout(notifyResize,1000);
+    resize();
+    setTimeout(resize,300);
+    setTimeout(resize,1200);
   });
-  notifyResize();
+  resize();
 };
 })();`;
 
-  const css=`.h5p-thanhta-html{width:100%;height:900px;min-height:700px;overflow:hidden;background:#fff}
-.h5p-thanhta-html .thanhta-html-frame{display:block;width:100%;height:100%;border:0;background:#fff}
-@media(max-width:700px){.h5p-thanhta-html{height:820px;min-height:640px}}`;
+const runnerCss=
+  ".h5p-thanhta-media-file{width:100%;min-height:760px}"+
+  ".thanhta-media-file-frame{display:block;width:100%;height:900px;min-height:760px;border:0;background:#fff}";
 
-  const blob=makeZip([
-    {name:"h5p.json",data:JSON.stringify(h5p,null,2)},
-    {name:"content/content.json",data:JSON.stringify(content,null,2)},
-    {name:"H5P.ThanhtaHtml-1.0/library.json",data:JSON.stringify(library,null,2)},
-    {name:"H5P.ThanhtaHtml-1.0/semantics.json",data:JSON.stringify(semantics,null,2)},
-    {name:"H5P.ThanhtaHtml-1.0/thanhta-html.js",data:runner},
-    {name:"H5P.ThanhtaHtml-1.0/thanhta-html.css",data:css}
-  ]);
+/* ---------- Build ---------- */
+$("#buildBtn").addEventListener("click",async()=>{
+  try{
+    if(!state.htmlFile) throw new Error("Chưa chọn file HTML.");
 
-  const a=document.createElement("a");
-  a.href=URL.createObjectURL(blob);
-  a.download=safeName(title)+"_DIRECT_TEST.h5p";
-  document.body.appendChild(a);
-  a.click();
-  setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},1200);
-  setStatus("Đã tạo file H5P thành công.","ok");
+    const missing=state.refs.filter(r=>!findAssetForRef(r));
+    if(missing.length){
+      throw new Error("Thiếu tài nguyên: "+missing.join(", "));
+    }
+
+    $("#buildBtn").disabled=true;
+    setStatus("Đang tạo H5P…");
+
+    const title=$("#title").value.trim() || state.htmlFile.name.replace(/\.html?$/i,"");
+    const htmlText=await state.htmlFile.text();
+
+    const assets=[];
+    const packedFiles=new Map();
+    let seq=1;
+
+    // Tạo asset cho từng đường dẫn mà HTML thực sự gọi.
+    for(const ref of state.refs){
+      const file=findAssetForRef(ref);
+      if(!file) continue;
+
+      let internalName="";
+      // Nếu file đã được đóng gói trước đó thì dùng lại cùng path nội bộ.
+      for(const [key,obj] of packedFiles){
+        if(obj.file===file){ internalName=obj.internalName; break; }
+      }
+
+      if(!internalName){
+        const ext=extOf(file.name) || ".bin";
+        internalName="asset_"+String(seq++).padStart(3,"0")+ext;
+        packedFiles.set(internalName,{file,internalName});
+      }
+
+      assets.push({
+        originalPath:normalizePath(ref),
+        file:{path:internalName,mime:mimeOf(file)}
+      });
+    }
+
+    // Tài nguyên được chọn nhưng HTML không gọi trực tiếp: vẫn đóng gói.
+    for(const [key,file] of state.assets){
+      const already=[...packedFiles.values()].some(x=>x.file===file);
+      if(!already){
+        const ext=extOf(file.name) || ".bin";
+        const internalName="asset_"+String(seq++).padStart(3,"0")+ext;
+        packedFiles.set(internalName,{file,internalName});
+      }
+    }
+
+    const h5pJson={
+      title,
+      language:"vi",
+      mainLibrary:"H5P.ThanhtaHtmlMediaFile",
+      embedTypes:["div"],
+      preloadedDependencies:[
+        {machineName:"H5P.ThanhtaHtmlMediaFile",majorVersion:1,minorVersion:0}
+      ]
+    };
+
+    const contentJson={
+      title,
+      htmlBase64:utf8ToBase64(htmlText),
+      assets
+    };
+
+    const enc=new TextEncoder();
+    const entries=[];
+    const addText=(name,text)=>entries.push({name,bytes:enc.encode(text)});
+
+    addText("h5p.json",JSON.stringify(h5pJson,null,2));
+    addText("content/content.json",JSON.stringify(contentJson));
+    addText("H5P.ThanhtaHtmlMediaFile-1.0/library.json",JSON.stringify(libraryJson,null,2));
+    addText("H5P.ThanhtaHtmlMediaFile-1.0/semantics.json",JSON.stringify(semanticsJson,null,2));
+    addText("H5P.ThanhtaHtmlMediaFile-1.0/runner.js",runnerJs);
+    addText("H5P.ThanhtaHtmlMediaFile-1.0/runner.css",runnerCss);
+
+    for(const [internalName,obj] of packedFiles){
+      entries.push({
+        name:"content/"+internalName,
+        bytes:new Uint8Array(await obj.file.arrayBuffer())
+      });
+    }
+
+    const blob=await makeZip(entries);
+    const fname=safeTitle(title)+".h5p";
+    downloadBlob(blob,fname);
+
+    setStatus("Tải file .H5P thành công","ok");
+  }catch(err){
+    setStatus("Lỗi: "+escapeHtml(err.message||String(err)),"err");
+  }finally{
+    updateUI();
+  }
 });
 </script>
 </body>
