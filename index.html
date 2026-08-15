@@ -1,0 +1,307 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="author" content="ThanhtaEdu">
+<title>ThanhtaEdu TEST | index.html → H5P trực tiếp</title>
+<style>
+:root{
+  --bg:#f6f7fb; --card:#fff; --text:#172033; --muted:#6b7280;
+  --p1:#4f46e5; --p2:#7c3aed; --line:#e5e7eb; --ok:#059669; --err:#dc2626;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+  background:
+    radial-gradient(circle at 15% 10%,rgba(99,102,241,.10),transparent 30%),
+    radial-gradient(circle at 85% 12%,rgba(168,85,247,.10),transparent 32%),
+    var(--bg);
+  color:var(--text)
+}
+.wrap{max-width:900px;margin:0 auto;padding:28px 18px 44px}
+.top-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;padding:4px 2px}
+.brand{display:flex;align-items:center;gap:12px;font-weight:900;font-size:24px;color:#158a78}
+.brand-logo{width:42px;height:42px;border-radius:13px;display:grid;place-items:center;background:linear-gradient(135deg,#14b8a6,#0f8f7f);color:#fff;font-size:22px}
+.brand-name .edu{color:#2563eb}
+.test-pill{padding:7px 10px;border-radius:999px;background:#fff7ed;border:1px solid #fed7aa;color:#9a3412;font-size:12px;font-weight:900}
+.hero{background:linear-gradient(135deg,#252a67,#4f46e5 52%,#7c3aed);color:white;border-radius:28px;padding:28px;box-shadow:0 22px 55px rgba(79,70,229,.18)}
+.hero h1{margin:0;font-size:32px}
+.hero p{margin:10px 0 0;opacity:.92;line-height:1.5}
+.badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.badge{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.16);padding:7px 10px;border-radius:999px;font-size:12px;font-weight:700}
+.card{margin-top:18px;background:var(--card);border:1px solid var(--line);border-radius:22px;padding:22px;box-shadow:0 12px 35px rgba(15,23,42,.05)}
+.field{margin-top:14px}.field:first-child{margin-top:0}
+.field label{display:block;font-size:12px;font-weight:800;color:#475569;margin-bottom:7px}
+.field input{width:100%;border:1px solid var(--line);border-radius:12px;padding:12px 13px;font:inherit;outline:none;background:#fff}
+.field input:focus{border-color:#a5b4fc;box-shadow:0 0 0 3px rgba(99,102,241,.10)}
+.filebox{border:2px dashed #c7d2fe;border-radius:16px;padding:18px;background:#f8faff}
+.filebox input{border:0;padding:0;background:transparent}
+.note{margin-top:12px;padding:12px 14px;border-radius:13px;background:#fff7ed;border:1px solid #fed7aa;color:#9a3412;font-size:12px;line-height:1.5}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+.btn{border:0;border-radius:13px;padding:12px 16px;font-weight:900;cursor:pointer}
+.btn.primary{background:linear-gradient(135deg,var(--p1),var(--p2));color:#fff}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.status{margin-top:16px;border-radius:14px;padding:13px 14px;background:#f8fafc;border:1px solid var(--line);font-size:13px;line-height:1.5;white-space:pre-wrap}
+.status.ok{background:#ecfdf5;border-color:#a7f3d0;color:#065f46}
+.status.err{background:#fef2f2;border-color:#fecaca;color:#991b1b}
+footer{text-align:center;color:#8a94a6;font-size:12px;margin-top:18px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top-header">
+    <div class="brand">
+      <div class="brand-logo">🎓</div>
+      <div class="brand-name">Thanhta<span class="edu">Edu</span></div>
+    </div>
+    
+  </header>
+
+  <section class="hero">
+    <h1>HTML → H5P Converter</h1>
+    
+    <div class="badges">
+      <span class="badge">🇻🇳 Giao diện tiếng Việt</span>
+      <span class="badge">📄 Tải file index.html</span>
+      <span class="badge">📦 Xuất .h5p</span>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="field">
+      <label>Tiêu đề bài học</label>
+      <input id="title" value="Bài học tương tác">
+    </div>
+
+    <div class="field filebox">
+      <label>Chọn file index.html</label>
+      <input id="htmlFile" type="file" accept=".html,.htm,text/html">
+    </div>
+<div class="actions">
+      <button id="build" class="btn primary" disabled>⬇ Tạo file H5P TEST</button>
+    </div>
+
+    <div id="status" class="status">Chưa chọn file.</div>
+  </section>
+
+  <footer>ThanhtaEdu - maithanhta77@gamail.com</footer>
+</div>
+
+<script>
+const $ = s => document.querySelector(s);
+let selectedText = "";
+let selectedName = "";
+
+function setStatus(msg,type=""){
+  const s=$("#status");
+  s.className="status"+(type?" "+type:"");
+  s.textContent=msg;
+}
+
+function utf8ToBase64(str){
+  const bytes = new TextEncoder().encode(str);
+  let binary = "";
+  const chunk = 0x8000;
+  for(let i=0;i<bytes.length;i+=chunk){
+    binary += String.fromCharCode(...bytes.subarray(i,i+chunk));
+  }
+  return btoa(binary);
+}
+
+$("#htmlFile").addEventListener("change", async (e)=>{
+  const f=e.target.files && e.target.files[0];
+  selectedText=""; selectedName="";
+  $("#build").disabled=true;
+  if(!f){setStatus("Chưa chọn file.");return;}
+  if(!/\.html?$/i.test(f.name)){setStatus("Vui lòng chọn file .html hoặc .htm.","err");return;}
+  try{
+    selectedText=await f.text();
+    selectedName=f.name;
+    if(!/<html[\s>]/i.test(selectedText) && !/<!doctype\s+html/i.test(selectedText)){
+      setStatus("File đã đọc nhưng không nhận thấy cấu trúc HTML chuẩn.","err");
+      return;
+    }
+    $("#build").disabled=false;
+    setStatus(`Đã đọc: ${f.name}\nDung lượng: ${(f.size/1024).toFixed(1)} KB\nSẵn sàng tạo H5P TEST.`,"ok");
+  }catch(err){
+    setStatus("Không đọc được file: "+err.message,"err");
+  }
+});
+
+/* ZIP writer - không dùng CDN */
+const crcTable=(()=>{
+  let c,t=[];
+  for(let n=0;n<256;n++){
+    c=n;
+    for(let k=0;k<8;k++) c=(c&1)?(0xEDB88320^(c>>>1)):(c>>>1);
+    t[n]=c>>>0;
+  }
+  return t;
+})();
+function crc32(bytes){
+  let c=0xffffffff;
+  for(let i=0;i<bytes.length;i++) c=crcTable[(c^bytes[i])&255]^(c>>>8);
+  return(c^0xffffffff)>>>0;
+}
+const u16=n=>new Uint8Array([n&255,(n>>>8)&255]);
+const u32=n=>new Uint8Array([n&255,(n>>>8)&255,(n>>>16)&255,(n>>>24)&255]);
+function concat(parts){
+  const len=parts.reduce((a,b)=>a+b.length,0),out=new Uint8Array(len);
+  let p=0; for(const x of parts){out.set(x,p);p+=x.length} return out;
+}
+function dos(d=new Date()){
+  return [
+    ((d.getHours()&31)<<11)|((d.getMinutes()&63)<<5)|(Math.floor(d.getSeconds()/2)&31),
+    (((d.getFullYear()-1980)&127)<<9)|(((d.getMonth()+1)&15)<<5)|(d.getDate()&31)
+  ];
+}
+function makeZip(files){
+  const enc=new TextEncoder(),locals=[],centrals=[]; let offset=0; const [tm,dt]=dos();
+  for(const f of files){
+    const name=enc.encode(f.name);
+    const data = f.bytes ? f.bytes : enc.encode(f.data);
+    const crc=crc32(data),flag=0x0800;
+    const local=concat([
+      u32(0x04034b50),u16(20),u16(flag),u16(0),u16(tm),u16(dt),
+      u32(crc),u32(data.length),u32(data.length),u16(name.length),u16(0),name,data
+    ]);
+    locals.push(local);
+    const central=concat([
+      u32(0x02014b50),u16(20),u16(20),u16(flag),u16(0),u16(tm),u16(dt),
+      u32(crc),u32(data.length),u32(data.length),u16(name.length),u16(0),
+      u16(0),u16(0),u16(0),u32(0),u32(offset),name
+    ]);
+    centrals.push(central); offset+=local.length;
+  }
+  const localData=concat(locals),centralData=concat(centrals);
+  const end=concat([
+    u32(0x06054b50),u16(0),u16(0),u16(files.length),u16(files.length),
+    u32(centralData.length),u32(localData.length),u16(0)
+  ]);
+  return new Blob([localData,centralData,end],{type:"application/zip"});
+}
+function safeName(s){
+  return (s||"bai_hoc").replace(/[\\/:*?"<>|]+/g,"_").replace(/\s+/g,"_").slice(0,90);
+}
+
+$("#build").addEventListener("click",()=>{
+  if(!selectedText){setStatus("Chưa có file HTML để đóng gói.","err");return;}
+
+  const title=$("#title").value.trim()||"Bài học tương tác";
+  const htmlBase64=utf8ToBase64(selectedText);
+
+  const h5p={
+    title,
+    language:"vi",
+    mainLibrary:"H5P.ThanhtaHtml",
+    embedTypes:["div"],
+    license:"U",
+    authors:[{name:"ThanhtaEdu",role:"Author"}],
+    preloadedDependencies:[
+      {machineName:"H5P.ThanhtaHtml",majorVersion:1,minorVersion:0}
+    ]
+  };
+
+  const content={
+    title,
+    htmlBase64
+  };
+
+  const library={
+    title:"Thanhta HTML Package",
+    description:"Experimental self-contained HTML runner for ThanhtaEdu",
+    majorVersion:1,
+    minorVersion:0,
+    patchVersion:0,
+    runnable:1,
+    author:"ThanhtaEdu",
+    license:"MIT",
+    machineName:"H5P.ThanhtaHtml",
+    preloadedJs:[{path:"thanhta-html.js"}],
+    preloadedCss:[{path:"thanhta-html.css"}]
+  };
+
+  const semantics=[
+    {name:"title",type:"text",label:"Title",optional:true},
+    {name:"htmlBase64",type:"text",label:"HTML Base64",importance:"high"}
+  ];
+
+  const runner=`(function(){
+"use strict";
+var decodeUtf8Base64=function(b64){
+  try{
+    var bin=atob(b64||"");
+    var bytes=new Uint8Array(bin.length);
+    for(var i=0;i<bin.length;i++) bytes[i]=bin.charCodeAt(i);
+    return new TextDecoder("utf-8").decode(bytes);
+  }catch(e){
+    return "<!doctype html><html><body><pre>Không giải mã được HTML: "+String(e)+"</pre></body></html>";
+  }
+};
+
+H5P.ThanhtaHtml=function(params,contentId){
+  H5P.EventDispatcher.call(this);
+  this.params=params||{};
+  this.contentId=contentId;
+};
+H5P.ThanhtaHtml.prototype=Object.create(H5P.EventDispatcher.prototype);
+H5P.ThanhtaHtml.prototype.constructor=H5P.ThanhtaHtml;
+
+H5P.ThanhtaHtml.prototype.attach=function($container){
+  var self=this;
+  $container.addClass("h5p-thanhta-html");
+  var iframe=document.createElement("iframe");
+  iframe.className="thanhta-html-frame";
+  iframe.setAttribute("frameborder","0");
+  iframe.setAttribute("scrolling","auto");
+  iframe.setAttribute("allow","autoplay; fullscreen; microphone; camera; clipboard-read; clipboard-write");
+  iframe.setAttribute("allowfullscreen","");
+  iframe.title=this.params.title||"Bài học tương tác";
+  $container.get(0).appendChild(iframe);
+
+  var html=decodeUtf8Base64(this.params.htmlBase64||"");
+  iframe.srcdoc=html;
+
+  var notifyResize=function(){
+    try{ self.trigger("resize"); }catch(e){}
+    try{
+      if(window.H5P && H5P.externalDispatcher){
+        H5P.externalDispatcher.trigger("resize");
+      }
+    }catch(e){}
+  };
+  iframe.addEventListener("load",function(){
+    notifyResize();
+    setTimeout(notifyResize,200);
+    setTimeout(notifyResize,1000);
+  });
+  notifyResize();
+};
+})();`;
+
+  const css=`.h5p-thanhta-html{width:100%;height:900px;min-height:700px;overflow:hidden;background:#fff}
+.h5p-thanhta-html .thanhta-html-frame{display:block;width:100%;height:100%;border:0;background:#fff}
+@media(max-width:700px){.h5p-thanhta-html{height:820px;min-height:640px}}`;
+
+  const blob=makeZip([
+    {name:"h5p.json",data:JSON.stringify(h5p,null,2)},
+    {name:"content/content.json",data:JSON.stringify(content,null,2)},
+    {name:"H5P.ThanhtaHtml-1.0/library.json",data:JSON.stringify(library,null,2)},
+    {name:"H5P.ThanhtaHtml-1.0/semantics.json",data:JSON.stringify(semantics,null,2)},
+    {name:"H5P.ThanhtaHtml-1.0/thanhta-html.js",data:runner},
+    {name:"H5P.ThanhtaHtml-1.0/thanhta-html.css",data:css}
+  ]);
+
+  const a=document.createElement("a");
+  a.href=URL.createObjectURL(blob);
+  a.download=safeName(title)+"_DIRECT_TEST.h5p";
+  document.body.appendChild(a);
+  a.click();
+  setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},1200);
+  setStatus("Đã tạo H5P TEST trực tiếp từ "+selectedName+".\nHãy tải file này lên Vietschool để kiểm tra.","ok");
+});
+</script>
+</body>
+</html>
