@@ -3,557 +3,456 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>ThanhtaEdu · HTML + Media → H5P</title>
+<meta name="author" content="ThanhtaEdu">
+<title>ThanhtaEdu · HTML + Video/Poster → H5P</title>
 <style>
 :root{
-  --green:#22a06b;--blue:#2878c8;--purple:#6d5dfc;--ink:#1f2937;
-  --muted:#667085;--line:#dbe7f3;--bg:#f4f7fb;--paper:#fff;
+  --bg:#eef4fb; --card:#fff; --text:#1f2937; --muted:#64748b;
+  --blue:#2476d2; --blue2:#155fa9; --line:#d8e5f3; --ok:#0d7b5d;
+  --okbg:#edf9f5; --okline:#bce8d8; --err:#b42318; --errbg:#fff1f0; --errline:#f6c2bd;
 }
 *{box-sizing:border-box}
-html,body{margin:0;min-height:100%;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--ink)}
-body{padding:22px}
-.wrap{width:min(980px,100%);margin:auto}
-.brand{display:flex;align-items:center;gap:11px;margin-bottom:16px}
-.logo{width:42px;height:42px;border-radius:12px;background:#27b6a2;display:grid;place-items:center;font-size:22px}
-.brandname{font-size:22px;font-weight:800}
-.brandname .a{color:#168c78} .brandname .b{color:#2466d1}
-.hero{
-  border-radius:20px;padding:26px 28px;color:#fff;
-  background:linear-gradient(135deg,#3435a8 0%,#5045e6 55%,#7c35f2 100%);
-  box-shadow:0 16px 38px rgba(87,73,210,.18)
+body{
+  margin:0;
+  font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+  color:var(--text);
+  background:linear-gradient(180deg,#edf4fb 0,#f7fbff 100%);
 }
-.hero h1{margin:0;text-align:center;font-size:30px}
-.badges{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-top:16px}
-.badge{background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.22);border-radius:999px;padding:7px 11px;font-size:13px;font-weight:700}
-.card{margin-top:18px;background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:22px;box-shadow:0 12px 30px rgba(20,62,100,.08)}
-.mode{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.box{border:2px dashed #b9d5ee;border-radius:16px;padding:22px;text-align:center;background:#fbfdff}
-.box strong{display:block;color:#185f9b;font-size:18px;margin-bottom:7px}
-.box p{margin:0 0 14px;color:var(--muted);font-size:14px;line-height:1.45}
+.wrap{max-width:980px;margin:0 auto;padding:22px 18px 38px}
+.top-header{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:14px;padding:2px 2px;
+}
+.brand{
+  display:flex;align-items:center;gap:10px;
+  font-weight:900;font-size:24px;color:#158a78;
+}
+.brand-logo{
+  width:42px;height:42px;border-radius:13px;
+  display:grid;place-items:center;
+  background:linear-gradient(135deg,#14b8a6,#0f8f7f);
+  color:#fff;font-size:22px;
+  box-shadow:0 7px 18px rgba(15,143,127,.18);
+}
+.brand-name .edu{color:#2563eb}
+.hero{
+  background:linear-gradient(135deg,#3c3bc5,#5a43ef 58%,#773ce7);
+  color:#fff;border-radius:0 0 22px 22px;padding:24px 28px 22px;
+  box-shadow:0 12px 28px rgba(63,67,190,.18);
+  text-align:center;
+}
+.hero h1{font-size:31px;line-height:1.1;margin:0;font-weight:900}
+.badges{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:16px}
+.badge{
+  border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.12);
+  border-radius:999px;padding:9px 15px;font-size:13px;font-weight:800
+}
+.card{
+  margin-top:18px;background:#fff;border:1px solid #dbe5ef;border-radius:18px;
+  padding:22px;box-shadow:0 8px 22px rgba(15,23,42,.05)
+}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.drop{
+  border:2px dashed #b7d6f5;border-radius:18px;min-height:150px;
+  padding:21px 18px;text-align:center;background:#fbfdff;
+}
+.drop h3{margin:0;color:#155fa9;font-size:18px}
+.drop p{margin:8px auto 16px;color:#64748b;font-size:13px;line-height:1.45;max-width:380px}
 input[type=file]{max-width:100%}
-.row{display:grid;grid-template-columns:1fr auto;gap:12px;margin-top:16px;align-items:end}
-label{display:block;font-weight:700;margin-bottom:7px;color:#344054}
-input[type=text]{width:100%;padding:12px 13px;border:1px solid #bed0e1;border-radius:10px;font-size:16px}
-button{border:0;border-radius:10px;padding:12px 18px;font-size:15px;font-weight:800;cursor:pointer}
-button.primary{background:var(--blue);color:#fff}
-button:disabled{opacity:.45;cursor:not-allowed}
-.files{margin-top:18px;border:1px solid #e1eaf2;border-radius:12px;overflow:hidden}
-.files-head{background:#f5f9fd;padding:10px 12px;font-weight:800;color:#41607a}
-.list{max-height:250px;overflow:auto}
-.item{display:grid;grid-template-columns:1fr auto;gap:12px;padding:9px 12px;border-top:1px solid #edf2f7;font-size:13px}
-.item span:last-child{color:#6d7f90}
-.status{margin-top:16px;padding:12px 14px;border-radius:10px;background:#eef7ff;border:1px solid #cae2f8;color:#205f96;line-height:1.45}
-.status.ok{background:#eefaf5;border-color:#c9eadc;color:#126849}
-.status.err{background:#fff2f2;border-color:#efc9c9;color:#9d3030}
-.status.warn{background:#fff8e8;border-color:#f0d596;color:#805b00}
-.note{margin-top:14px;font-size:13px;color:#6c7d8c;line-height:1.5}
-footer{text-align:center;color:#7d8b98;font-size:12px;padding:18px 0}
-@media(max-width:720px){body{padding:10px}.mode{grid-template-columns:1fr}.row{grid-template-columns:1fr}.hero h1{font-size:24px}}
+.row{display:flex;gap:12px;align-items:end;margin-top:16px}
+.field{flex:1}
+.field label{display:block;font-weight:850;margin-bottom:8px;color:#334155}
+.field input[type=text]{
+  width:100%;font:inherit;padding:12px 13px;border:1px solid #bad3eb;
+  border-radius:11px;outline:none;background:#fff
+}
+.field input[type=text]:focus{border-color:#69a9df;box-shadow:0 0 0 3px rgba(36,118,210,.1)}
+.btn{
+  border:0;border-radius:11px;padding:12px 18px;font-weight:900;font-size:15px;cursor:pointer;
+  background:linear-gradient(135deg,#2d86de,#1f70c4);color:#fff;min-width:150px
+}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.scan{
+  margin-top:18px;border:1px solid #d8e5f3;border-radius:13px;overflow:hidden
+}
+.scan-title{
+  padding:10px 12px;background:#f2f7fc;font-weight:850;color:#3c607c;border-bottom:1px solid #e3edf6
+}
+.scan-body{padding:10px 12px;font-size:13px;color:#516273;line-height:1.55;background:#fff}
+.status{
+  margin-top:16px;border-radius:12px;padding:14px 15px;font-size:14px;line-height:1.5;
+  background:#f5f7fa;border:1px solid #dde4ec;color:#526170
+}
+.status.ok{background:var(--okbg);border-color:var(--okline);color:var(--ok)}
+.status.err{background:var(--errbg);border-color:var(--errline);color:var(--err)}
+.hint{margin:14px 0 0;color:#65768a;font-size:12px;line-height:1.6}
+footer{text-align:center;color:#7c8ca0;font-size:12px;margin-top:18px}
+.toast{
+  position:fixed;right:24px;top:24px;z-index:9999;
+  background:#0b7b5d;color:#fff;padding:14px 18px;border-radius:12px;
+  box-shadow:0 14px 35px rgba(0,0,0,.18);font-weight:900;
+  opacity:0;transform:translateY(-10px);pointer-events:none;transition:.22s ease
+}
+.toast.show{opacity:1;transform:translateY(0)}
+@media(max-width:720px){
+  .grid{grid-template-columns:1fr}
+  .row{flex-direction:column;align-items:stretch}
+  .btn{width:100%}
+  .hero h1{font-size:26px}
+}
 </style>
 </head>
 <body>
-<div class="wrap">
-  <div class="brand">
-    <div class="logo">🎓</div>
-    <div class="brandname"><span class="a">Thanhta</span><span class="b">Edu</span></div>
-  </div>
+<div id="toast" class="toast">Tải H5P thành công.</div>
 
-  <div class="hero">
+<div class="wrap">
+  <header class="top-header">
+    <div class="brand">
+      <div class="brand-logo">🎓</div>
+      <div class="brand-name">Thanhta<span class="edu">Edu</span></div>
+    </div>
+  </header>
+
+  <section class="hero">
     <h1>HTML → H5P Converter</h1>
     <div class="badges">
       <span class="badge">📄 Tải file HTML</span>
       <span class="badge">🎬 Tải file HTML + Video</span>
       <span class="badge">🇻🇳 Hỗ trợ tiếng Việt</span>
     </div>
-  </div>
+  </section>
 
-  <div class="card">
-    <div class="mode">
-      <div class="box">
-        <strong>1. Chọn file HTML</strong>
-        <p>Chọn <b>index.html</b> hoặc <b>index.htm</b>. Nếu bài không có media ngoài thì chỉ cần bước này.</p>
-        <input id="htmlInput" type="file" accept=".html,.htm">
+  <section class="card">
+    <div class="grid">
+      <div class="drop">
+        <h3>1. Chọn file HTML</h3>
+        <p>Chọn index.html hoặc index.htm. Nếu bài không có media ngoài thì chỉ cần bước này.</p>
+        <input id="htmlFile" type="file" accept=".html,.htm,text/html">
       </div>
 
-      <div class="box">
-        <strong>2. Video / tài nguyên (nếu có)</strong>
-        <p>Nếu bài chỉ có 1 file <b>index.html / index.htm</b> thì bỏ qua bước này.</p>
-        <input id="assetInput" type="file" multiple
-          accept=".mp4,.webm,.ogg,.mp3,.m4a,.wav,.png,.jpg,.jpeg,.gif,.bmp,.tif,.tiff,.svg,.webp,.vtt,.webvtt,.css,.js">
+      <div class="drop">
+        <h3>2. Video / Poster (nếu có)</h3>
+        <p>Nếu bài chỉ có 1 file index.html (không có video/poster) thì bỏ qua bước này.</p>
+        <input id="mediaFiles" type="file" multiple
+               accept="video/*,image/*,audio/*,.mp4,.webm,.mov,.m4v,.jpg,.jpeg,.png,.webp,.gif,.svg,.mp3,.wav,.m4a,.ogg">
       </div>
     </div>
 
     <div class="row">
-      <div>
-        <label for="title">Tiêu đề bài học</label>
+      <div class="field">
+        <label>Tiêu đề bài học</label>
         <input id="title" type="text" value="BÀI HỌC TƯƠNG TÁC">
       </div>
-      <button id="buildBtn" class="primary" disabled>TẠO FILE H5P</button>
+      <button id="build" class="btn" disabled>TẠO FILE H5P</button>
     </div>
 
-    <div id="filesBox" class="files" style="display:none">
-      <div class="files-head">Kiểm tra tệp trước khi đóng gói</div>
-      <div id="fileList" class="list"></div>
+    <div class="scan">
+      <div class="scan-title">Kiểm tra tệp trước khi đóng gói</div>
+      <div id="scanBody" class="scan-body">Chưa chọn file HTML.</div>
     </div>
 
-    <div id="status" class="status">Chưa tải file...</div>
-
-    <div class="note">
-      Có thể chuyển <b>HTML duy nhất</b> hoặc <b>HTML + media</b>. Nếu HTML có gọi video/ảnh/audio bên ngoài,
-      app sẽ yêu cầu chọn đúng tệp trước khi tạo H5P.
-    </div>
-  </div>
+    <div id="status" class="status">Chưa chọn file.</div>
+    <p class="hint">
+      Có thể chuyển <b>HTML duy nhất</b> hoặc <b>HTML + video/poster</b>.
+      Nếu HTML có gọi video/ảnh/audio bên ngoài, hãy chọn đúng các tệp đó trước khi tạo H5P.
+    </p>
+  </section>
 
   <footer>ThanhtaEdu · maithanhta77@gmail.com</footer>
 </div>
 
 <script>
-"use strict";
-
 const $ = s => document.querySelector(s);
-const state = { htmlFile:null, assets:new Map(), refs:[] };
 
-const allowedAsset = /\.(mp4|webm|ogg|mp3|m4a|wav|png|jpe?g|gif|bmp|tiff?|svg|webp|vtt|webvtt|css|js)$/i;
+let selectedText = "";
+let selectedName = "";
+let selectedHtmlFile = null;
+let selectedMedia = [];
+let localRefs = [];
 
-function normalizePath(p){
-  return String(p||"")
-    .normalize("NFC")
-    .trim()
-    .replace(/\\/g,"/")
-    .replace(/^\.\//,"")
-    .replace(/^\/+/,"");
+function setStatus(msg,type=""){
+  const el=$("#status");
+  el.className="status"+(type?" "+type:"");
+  el.textContent=msg;
 }
-
-function basename(p){
-  const s=normalizePath(p).split("/");
-  return s[s.length-1]||"";
+function showToast(){
+  const t=$("#toast");
+  t.classList.add("show");
+  clearTimeout(showToast.timer);
+  showToast.timer=setTimeout(()=>t.classList.remove("show"),2600);
 }
-
-function escapeHtml(s){
-  return String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));
-}
-
-function prettySize(n){
+function fmtSize(n){
   if(n<1024) return n+" B";
   if(n<1024*1024) return (n/1024).toFixed(1)+" KB";
   return (n/1024/1024).toFixed(1)+" MB";
 }
-
-function setStatus(msg, kind=""){
-  const el=$("#status");
-  el.className="status"+(kind?" "+kind:"");
-  el.innerHTML=msg;
+function esc(s){
+  return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 }
-
-function safeTitle(s){
-  return (s||"bai_hoc")
-    .normalize("NFD").replace(/[\u0300-\u036f]/g,"")
-    .replace(/đ/g,"d").replace(/Đ/g,"D")
-    .replace(/[^\w.-]+/g,"_")
-    .replace(/^_+|_+$/g,"") || "bai_hoc";
+function isLocalRef(v){
+  if(!v) return false;
+  v=v.trim();
+  return !/^(?:https?:|data:|blob:|#|mailto:|tel:|javascript:|\/\/)/i.test(v);
 }
-
-function extOf(name){
-  const m=/(\.[A-Za-z0-9]+)$/.exec(name||"");
-  return m ? m[1].toLowerCase() : "";
-}
-
-function mimeOf(file){
-  if(file.type) return file.type;
-  const ext=extOf(file.name);
-  const map={
-    ".mp4":"video/mp4",".webm":"video/webm",".ogg":"video/ogg",
-    ".mp3":"audio/mpeg",".m4a":"audio/mp4",".wav":"audio/wav",
-    ".png":"image/png",".jpg":"image/jpeg",".jpeg":"image/jpeg",
-    ".gif":"image/gif",".svg":"image/svg+xml",".webp":"image/webp",
-    ".vtt":"text/vtt",".webvtt":"text/vtt",".css":"text/css",".js":"text/javascript"
-  };
-  return map[ext] || "application/octet-stream";
-}
-
-function findRelativeRefs(html){
+function scanRefs(html){
   const refs=new Set();
-  let m;
-
   const attr=/\b(?:src|href|poster)\s*=\s*["']([^"']+)["']/gi;
+  let m;
   while((m=attr.exec(html))){
-    const p=normalizePath(m[1]);
-    if(!p || /^(?:https?:|data:|blob:|#|javascript:|mailto:|tel:)/i.test(p)) continue;
-    if(allowedAsset.test(p)) refs.add(p);
+    const v=m[1].trim();
+    if(isLocalRef(v)) refs.add(v.split(/[?#]/)[0]);
   }
-
   const css=/url\(\s*["']?([^"')]+)["']?\s*\)/gi;
   while((m=css.exec(html))){
-    const p=normalizePath(m[1]);
-    if(!p || /^(?:https?:|data:|blob:)/i.test(p)) continue;
-    if(allowedAsset.test(p)) refs.add(p);
+    const v=m[1].trim();
+    if(isLocalRef(v)) refs.add(v.split(/[?#]/)[0]);
   }
-
   return [...refs];
 }
-
-function findAssetForRef(ref){
-  ref=normalizePath(ref);
-  if(state.assets.has(ref)) return state.assets.get(ref);
-
-  const b=basename(ref);
-  for(const [key,file] of state.assets){
-    if(basename(key)===b) return file;
-  }
-  return null;
+function baseName(p){
+  try{p=decodeURIComponent(p)}catch(e){}
+  p=p.replace(/\\/g,"/");
+  return p.split("/").pop();
 }
-
-async function inspect(){
-  state.refs=[];
-  if(!state.htmlFile){ updateUI(); return; }
-  const html=await state.htmlFile.text();
-  state.refs=findRelativeRefs(html);
-  updateUI();
+function updateScan(){
+  if(!selectedHtmlFile){
+    $("#scanBody").textContent="Chưa chọn file HTML.";
+    return;
+  }
+  let out=`✓ HTML: ${selectedName} — ${fmtSize(selectedHtmlFile.size)}`;
+  if(selectedMedia.length){
+    out += "<br>"+selectedMedia.map(f=>`✓ Video/Poster: ${esc(f.name)} — ${fmtSize(f.size)}`).join("<br>");
+  }
+  if(localRefs.length){
+    out += "<br><br><b>HTML đang gọi tệp:</b><br>"+localRefs.map(r=>"• "+esc(r)).join("<br>");
+  }
+  $("#scanBody").innerHTML=out;
 }
-
-function updateUI(){
-  const rows=[];
-
-  if(state.htmlFile){
-    rows.push({left:"✓ HTML: "+state.htmlFile.name,right:prettySize(state.htmlFile.size)});
+function updateReady(){
+  $("#build").disabled=!selectedText;
+  if(!selectedText) return;
+  if(!localRefs.length){
+    setStatus("HTML không gọi video/poster bên ngoài. Có thể tạo H5P chỉ với file HTML.","ok");
+    return;
   }
-
-  const missing=[];
-  for(const ref of state.refs){
-    const file=findAssetForRef(ref);
-    if(file){
-      rows.push({left:"✓ HTML gọi: "+ref,right:prettySize(file.size)});
-    }else{
-      rows.push({left:"⚠ Thiếu: "+ref,right:""});
-      missing.push(ref);
-    }
-  }
-
-  for(const [name,file] of state.assets){
-    const used=state.refs.some(r=>{
-      const f=findAssetForRef(r);
-      return f===file;
-    });
-    if(!used){
-      rows.push({left:"✓ Tài nguyên thêm: "+name,right:prettySize(file.size)});
-    }
-  }
-
-  $("#filesBox").style.display = rows.length ? "block" : "none";
-  $("#fileList").innerHTML = rows.map(x =>
-    `<div class="item"><span>${escapeHtml(x.left)}</span><span>${escapeHtml(x.right)}</span></div>`
-  ).join("");
-
-  $("#buildBtn").disabled = !state.htmlFile || missing.length>0;
-
-  if(!state.htmlFile){
-    setStatus("Chưa tải file...");
-  }else if(missing.length){
-    setStatus("HTML đang gọi <b>"+missing.map(escapeHtml).join(", ")+"</b> nhưng chưa chọn đúng tệp tương ứng.","warn");
+  const names=new Set(selectedMedia.map(f=>f.name.toLowerCase()));
+  const missing=localRefs.filter(r=>!names.has(baseName(r).toLowerCase()));
+  if(missing.length){
+    setStatus("HTML đang gọi tệp bên ngoài. Còn thiếu: "+missing.map(baseName).join(", "), "err");
   }else{
-    if(state.refs.length===0){
-      setStatus("HTML không gọi tài nguyên ngoài. Có thể tạo H5P chỉ với file HTML.","ok");
-    }else{
-      setStatus("Đã tải file. Bấm TẠO FILE H5P để chuyển đổi.","ok");
-    }
+    setStatus("Đã chọn đủ video/poster cần thiết. Có thể tạo H5P.","ok");
   }
 }
-
-$("#htmlInput").addEventListener("change", e=>{
-  state.htmlFile=e.target.files[0]||null;
-  if(state.htmlFile && !$("#title").value.trim()){
-    $("#title").value=state.htmlFile.name.replace(/\.html?$/i,"");
-  }
-  inspect();
+$("#htmlFile").addEventListener("change", async e=>{
+  const f=e.target.files?.[0];
+  selectedText=""; selectedName=""; selectedHtmlFile=null; localRefs=[];
+  $("#build").disabled=true;
+  if(!f){updateScan();setStatus("Chưa chọn file.");return;}
+  if(!/\.html?$/i.test(f.name)){setStatus("Vui lòng chọn file .html hoặc .htm.","err");return;}
+  try{
+    const txt=await f.text();
+    if(!/<html[\s>]/i.test(txt) && !/<!doctype\s+html/i.test(txt)){
+      setStatus("File đã đọc nhưng không nhận thấy cấu trúc HTML chuẩn.","err");return;
+    }
+    selectedText=txt; selectedName=f.name; selectedHtmlFile=f; localRefs=scanRefs(txt);
+    updateScan(); updateReady();
+  }catch(err){setStatus("Không đọc được file: "+err.message,"err")}
+});
+$("#mediaFiles").addEventListener("change",e=>{
+  selectedMedia=[...(e.target.files||[])];
+  updateScan(); updateReady();
 });
 
-$("#assetInput").addEventListener("change", e=>{
-  state.assets.clear();
-  for(const f of e.target.files){
-    if(allowedAsset.test(f.name)){
-      state.assets.set(normalizePath(f.name),f);
+function arrayBufferToBase64(buf){
+  const bytes=new Uint8Array(buf);
+  let bin="",step=0x8000;
+  for(let i=0;i<bytes.length;i+=step) bin+=String.fromCharCode(...bytes.subarray(i,i+step));
+  return btoa(bin);
+}
+function utf8ToBase64(str){
+  const bytes=new TextEncoder().encode(str);
+  let binary="",chunk=0x8000;
+  for(let i=0;i<bytes.length;i+=chunk) binary+=String.fromCharCode(...bytes.subarray(i,i+chunk));
+  return btoa(binary);
+}
+function mimeFor(f){
+  if(f.type) return f.type;
+  const ext=f.name.split(".").pop().toLowerCase();
+  return ({mp4:"video/mp4",webm:"video/webm",mov:"video/quicktime",m4v:"video/x-m4v",
+    jpg:"image/jpeg",jpeg:"image/jpeg",png:"image/png",webp:"image/webp",gif:"image/gif",svg:"image/svg+xml",
+    mp3:"audio/mpeg",wav:"audio/wav",m4a:"audio/mp4",ogg:"audio/ogg"})[ext]||"application/octet-stream";
+}
+async function inlineMedia(html){
+  let out=html;
+  for(const f of selectedMedia){
+    const b64=arrayBufferToBase64(await f.arrayBuffer());
+    const data=`data:${mimeFor(f)};base64,${b64}`;
+    const candidates=new Set([f.name]);
+    for(const r of localRefs) if(baseName(r).toLowerCase()===f.name.toLowerCase()) candidates.add(r);
+    for(const c of candidates){
+      const escaped=c.replace(/[.*+?^${}()|[\]\\]/g,"\\$&");
+      out=out.replace(new RegExp(escaped,"g"),data);
+      try{
+        const enc=encodeURI(c).replace(/[.*+?^${}()|[\]\\]/g,"\\$&");
+        out=out.replace(new RegExp(enc,"g"),data);
+      }catch(e){}
     }
   }
-  inspect();
-});
-
-/* ---------- ZIP writer ---------- */
-function u16(n){return new Uint8Array([n&255,(n>>>8)&255]);}
-function u32(n){return new Uint8Array([n&255,(n>>>8)&255,(n>>>16)&255,(n>>>24)&255]);}
-function concat(parts){
-  const len=parts.reduce((s,p)=>s+p.length,0), out=new Uint8Array(len);
-  let o=0; for(const p of parts){out.set(p,o);o+=p.length;} return out;
+  return out;
 }
-const CRC_TABLE=(()=>{
-  const t=new Uint32Array(256);
+
+/* ZIP writer - offline, không CDN */
+const crcTable=(()=>{
+  let c,t=[];
   for(let n=0;n<256;n++){
-    let c=n;
+    c=n;
     for(let k=0;k<8;k++) c=(c&1)?(0xEDB88320^(c>>>1)):(c>>>1);
     t[n]=c>>>0;
   }
   return t;
 })();
 function crc32(bytes){
-  let c=0xFFFFFFFF;
-  for(const b of bytes) c=CRC_TABLE[(c^b)&255]^(c>>>8);
-  return (c^0xFFFFFFFF)>>>0;
+  let c=0xffffffff;
+  for(let i=0;i<bytes.length;i++) c=crcTable[(c^bytes[i])&255]^(c>>>8);
+  return(c^0xffffffff)>>>0;
 }
-async function makeZip(entries){
-  const locals=[],centrals=[];let offset=0;
-  for(const ent of entries){
-    const nameBytes=new TextEncoder().encode(ent.name);
-    const data=ent.bytes instanceof Uint8Array ? ent.bytes : new Uint8Array(ent.bytes);
-    const crc=crc32(data);
+const u16=n=>new Uint8Array([n&255,(n>>>8)&255]);
+const u32=n=>new Uint8Array([n&255,(n>>>8)&255,(n>>>16)&255,(n>>>24)&255]);
+function concat(parts){
+  const len=parts.reduce((a,b)=>a+b.length,0),out=new Uint8Array(len);
+  let p=0; for(const x of parts){out.set(x,p);p+=x.length} return out;
+}
+function dos(d=new Date()){
+  return [
+    ((d.getHours()&31)<<11)|((d.getMinutes()&63)<<5)|(Math.floor(d.getSeconds()/2)&31),
+    (((d.getFullYear()-1980)&127)<<9)|(((d.getMonth()+1)&15)<<5)|(d.getDate()&31)
+  ];
+}
+function makeZip(files){
+  const enc=new TextEncoder(),locals=[],centrals=[]; let offset=0; const [tm,dt]=dos();
+  for(const f of files){
+    const name=enc.encode(f.name);
+    const data=f.bytes?f.bytes:enc.encode(f.data);
+    const crc=crc32(data),flag=0x0800;
     const local=concat([
-      u32(0x04034b50),u16(20),u16(0x0800),u16(0),u16(0),u16(0),
-      u32(crc),u32(data.length),u32(data.length),u16(nameBytes.length),u16(0),
-      nameBytes,data
+      u32(0x04034b50),u16(20),u16(flag),u16(0),u16(tm),u16(dt),
+      u32(crc),u32(data.length),u32(data.length),u16(name.length),u16(0),name,data
     ]);
     locals.push(local);
     const central=concat([
-      u32(0x02014b50),u16(20),u16(20),u16(0x0800),u16(0),u16(0),u16(0),
-      u32(crc),u32(data.length),u32(data.length),u16(nameBytes.length),u16(0),
-      u16(0),u16(0),u16(0),u32(0),u32(offset),nameBytes
+      u32(0x02014b50),u16(20),u16(20),u16(flag),u16(0),u16(tm),u16(dt),
+      u32(crc),u32(data.length),u32(data.length),u16(name.length),u16(0),
+      u16(0),u16(0),u16(0),u32(0),u32(offset),name
     ]);
-    centrals.push(central);
-    offset+=local.length;
+    centrals.push(central); offset+=local.length;
   }
-  const centralData=concat(centrals);
+  const localData=concat(locals),centralData=concat(centrals);
   const end=concat([
-    u32(0x06054b50),u16(0),u16(0),u16(entries.length),u16(entries.length),
-    u32(centralData.length),u32(offset),u16(0)
+    u32(0x06054b50),u16(0),u16(0),u16(files.length),u16(files.length),
+    u32(centralData.length),u32(localData.length),u16(0)
   ]);
-  return new Blob([...locals,centralData,end],{type:"application/zip"});
+  return new Blob([localData,centralData,end],{type:"application/zip"});
 }
-function downloadBlob(blob,name){
-  const a=document.createElement("a");
-  a.href=URL.createObjectURL(blob);
-  a.download=name;
-  document.body.appendChild(a);
-  a.click();
-  a.remove();
-  setTimeout(()=>URL.revokeObjectURL(a.href),1500);
+function safeName(s){
+  return (s||"bai_hoc").replace(/[\\/:*?"<>|]+/g,"_").replace(/\s+/g,"_").slice(0,90);
 }
 
-function utf8ToBase64(str){
-  const bytes=new TextEncoder().encode(str);
-  let bin="",chunk=0x8000;
-  for(let i=0;i<bytes.length;i+=chunk){
-    bin+=String.fromCharCode(...bytes.subarray(i,i+chunk));
+$("#build").addEventListener("click",async()=>{
+  if(!selectedText){setStatus("Chưa có file HTML để đóng gói.","err");return;}
+  const names=new Set(selectedMedia.map(f=>f.name.toLowerCase()));
+  const missing=localRefs.filter(r=>!names.has(baseName(r).toLowerCase()));
+  if(missing.length){
+    setStatus("Chưa đủ video/poster: "+missing.map(baseName).join(", "),"err");
+    return;
   }
-  return btoa(bin);
-}
 
-/* ---------- H5P library ---------- */
-const libraryJson={
-  title:"Thanhta HTML Media File",
-  description:"Runs HTML interactive lessons and stores media using official H5P file fields.",
-  majorVersion:1,minorVersion:0,patchVersion:0,runnable:1,
-  author:"ThanhtaEdu",license:"MIT",
-  machineName:"H5P.ThanhtaHtmlMediaFile",
-  preloadedJs:[{path:"runner.js"}],
-  preloadedCss:[{path:"runner.css"}]
-};
+  const button=$("#build");
+  button.disabled=true; button.textContent="ĐANG TẠO H5P...";
+  try{
+    const title=$("#title").value.trim()||"Bài học tương tác";
+    const processed=await inlineMedia(selectedText);
+    const htmlBase64=utf8ToBase64(processed);
 
-const semanticsJson=[
-  {name:"title",type:"text",label:"Tiêu đề"},
-  {name:"htmlBase64",type:"text",label:"HTML Base64"},
-  {
-    name:"assets",
-    type:"list",
-    label:"Tài nguyên",
-    field:{
-      name:"asset",
-      type:"group",
-      label:"Tài nguyên",
-      fields:[
-        {name:"originalPath",type:"text",label:"Đường dẫn gốc"},
-        {name:"file",type:"file",label:"Tệp",optional:false}
-      ]
-    }
-  }
-];
-
-const runnerJs=`(function(){
+    const h5p={
+      title,language:"vi",mainLibrary:"H5P.ThanhtaHtml",embedTypes:["div"],license:"U",
+      authors:[{name:"ThanhtaEdu",role:"Author"}],
+      preloadedDependencies:[{machineName:"H5P.ThanhtaHtml",majorVersion:1,minorVersion:0}]
+    };
+    const content={title,htmlBase64};
+    const library={
+      title:"Thanhta HTML Package",
+      description:"Self-contained HTML runner for ThanhtaEdu",
+      majorVersion:1,minorVersion:0,patchVersion:0,runnable:1,
+      author:"ThanhtaEdu",license:"MIT",machineName:"H5P.ThanhtaHtml",
+      preloadedJs:[{path:"thanhta-html.js"}],
+      preloadedCss:[{path:"thanhta-html.css"}]
+    };
+    const semantics=[
+      {name:"title",type:"text",label:"Title",optional:true},
+      {name:"htmlBase64",type:"text",label:"HTML Base64",importance:"high"}
+    ];
+    const runner=`(function(){
 "use strict";
-
-function decodeUtf8Base64(b64){
+var decodeUtf8Base64=function(b64){
   try{
     var bin=atob(b64||"");
     var bytes=new Uint8Array(bin.length);
-    for(var i=0;i<bin.length;i++)bytes[i]=bin.charCodeAt(i);
+    for(var i=0;i<bin.length;i++) bytes[i]=bin.charCodeAt(i);
     return new TextDecoder("utf-8").decode(bytes);
-  }catch(e){
-    return "<!doctype html><html><body><pre>"+String(e)+"</pre></body></html>";
-  }
-}
-
-function normalizePath(p){
-  try{return String(p||"").normalize("NFC").trim().replace(/\\\\/g,"/").replace(/^\\.\\//,"").replace(/^\\/+/,"");}
-  catch(e){return String(p||"").trim().replace(/\\\\/g,"/").replace(/^\\.\\//,"").replace(/^\\/+/,"");}
-}
-
-function replaceRef(html,originalPath,url){
-  var p=normalizePath(originalPath);
-  var variants=[p];
-  if(p.indexOf("./")!==0) variants.push("./"+p);
-
-  variants.forEach(function(v){
-    html=html.split('"'+v+'"').join('"'+url+'"');
-    html=html.split("'"+v+"'").join("'"+url+"'");
-    html=html.split("url("+v+")").join('url("'+url+'")');
-    html=html.split('url("'+v+'")').join('url("'+url+'")');
-    html=html.split("url('"+v+"')").join("url('"+url+"')");
-  });
-
-  return html;
-}
-
-H5P.ThanhtaHtmlMediaFile=function(params,contentId){
-  H5P.EventDispatcher.call(this);
-  this.params=params||{};
-  this.contentId=contentId;
+  }catch(e){return "<!doctype html><html><body><pre>Không giải mã được HTML.</pre></body></html>";}
 };
-
-H5P.ThanhtaHtmlMediaFile.prototype=Object.create(H5P.EventDispatcher.prototype);
-H5P.ThanhtaHtmlMediaFile.prototype.constructor=H5P.ThanhtaHtmlMediaFile;
-
-H5P.ThanhtaHtmlMediaFile.prototype.attach=function($container){
+H5P.ThanhtaHtml=function(params,contentId){
+  H5P.EventDispatcher.call(this);this.params=params||{};this.contentId=contentId;
+};
+H5P.ThanhtaHtml.prototype=Object.create(H5P.EventDispatcher.prototype);
+H5P.ThanhtaHtml.prototype.constructor=H5P.ThanhtaHtml;
+H5P.ThanhtaHtml.prototype.attach=function($container){
   var self=this;
-  var html=decodeUtf8Base64(this.params.htmlBase64||"");
-  var assets=this.params.assets||[];
-
-  assets.forEach(function(asset){
-    if(!asset || !asset.originalPath || !asset.file || !asset.file.path)return;
-    var url=H5P.getPath(asset.file.path,self.contentId);
-    html=replaceRef(html,asset.originalPath,url);
-  });
-
+  $container.addClass("h5p-thanhta-html");
   var iframe=document.createElement("iframe");
-  iframe.className="thanhta-media-file-frame";
+  iframe.className="thanhta-html-frame";
   iframe.setAttribute("frameborder","0");
   iframe.setAttribute("scrolling","auto");
   iframe.setAttribute("allow","autoplay; fullscreen; microphone; camera; clipboard-read; clipboard-write");
   iframe.setAttribute("allowfullscreen","");
   iframe.title=this.params.title||"Bài học tương tác";
-  $container.addClass("h5p-thanhta-media-file").get(0).appendChild(iframe);
-
-  iframe.srcdoc=html;
-
-  function resize(){
-    try{self.trigger("resize");}catch(e){}
-    try{if(H5P.externalDispatcher)H5P.externalDispatcher.trigger("resize");}catch(e){}
-  }
-
-  iframe.addEventListener("load",function(){
-    resize();
-    setTimeout(resize,300);
-    setTimeout(resize,1200);
-  });
+  $container.get(0).appendChild(iframe);
+  iframe.srcdoc=decodeUtf8Base64(this.params.htmlBase64||"");
+  var resize=function(){
+    try{self.trigger("resize")}catch(e){}
+    try{if(window.H5P&&H5P.externalDispatcher)H5P.externalDispatcher.trigger("resize")}catch(e){}
+  };
+  iframe.addEventListener("load",function(){resize();setTimeout(resize,250);setTimeout(resize,1000)});
   resize();
 };
 })();`;
+    const css=`.h5p-thanhta-html{width:100%;height:900px;min-height:700px;overflow:hidden;background:#fff}
+.h5p-thanhta-html .thanhta-html-frame{display:block;width:100%;height:100%;border:0;background:#fff}
+@media(max-width:700px){.h5p-thanhta-html{height:820px;min-height:640px}}`;
 
-const runnerCss=
-  ".h5p-thanhta-media-file{width:100%;min-height:760px}"+
-  ".thanhta-media-file-frame{display:block;width:100%;height:900px;min-height:760px;border:0;background:#fff}";
+    const blob=makeZip([
+      {name:"h5p.json",data:JSON.stringify(h5p,null,2)},
+      {name:"content/content.json",data:JSON.stringify(content,null,2)},
+      {name:"H5P.ThanhtaHtml-1.0/library.json",data:JSON.stringify(library,null,2)},
+      {name:"H5P.ThanhtaHtml-1.0/semantics.json",data:JSON.stringify(semantics,null,2)},
+      {name:"H5P.ThanhtaHtml-1.0/thanhta-html.js",data:runner},
+      {name:"H5P.ThanhtaHtml-1.0/thanhta-html.css",data:css}
+    ]);
 
-/* ---------- Build ---------- */
-$("#buildBtn").addEventListener("click",async()=>{
-  try{
-    if(!state.htmlFile) throw new Error("Chưa chọn file HTML.");
+    const a=document.createElement("a");
+    a.href=URL.createObjectURL(blob);
+    a.download=safeName(title)+".h5p";
+    document.body.appendChild(a);
+    a.click();
 
-    const missing=state.refs.filter(r=>!findAssetForRef(r));
-    if(missing.length){
-      throw new Error("Thiếu tài nguyên: "+missing.join(", "));
-    }
+    setStatus("Tải H5P thành công.","ok");
+    showToast();
 
-    $("#buildBtn").disabled=true;
-    setStatus("Đang tạo H5P…");
-
-    const title=$("#title").value.trim() || state.htmlFile.name.replace(/\.html?$/i,"");
-    const htmlText=await state.htmlFile.text();
-
-    const assets=[];
-    const packedFiles=new Map();
-    let seq=1;
-
-    // Tạo asset cho từng đường dẫn mà HTML thực sự gọi.
-    for(const ref of state.refs){
-      const file=findAssetForRef(ref);
-      if(!file) continue;
-
-      let internalName="";
-      // Nếu file đã được đóng gói trước đó thì dùng lại cùng path nội bộ.
-      for(const [key,obj] of packedFiles){
-        if(obj.file===file){ internalName=obj.internalName; break; }
-      }
-
-      if(!internalName){
-        const ext=extOf(file.name) || ".bin";
-        internalName="asset_"+String(seq++).padStart(3,"0")+ext;
-        packedFiles.set(internalName,{file,internalName});
-      }
-
-      assets.push({
-        originalPath:normalizePath(ref),
-        file:{path:internalName,mime:mimeOf(file)}
-      });
-    }
-
-    // Tài nguyên được chọn nhưng HTML không gọi trực tiếp: vẫn đóng gói.
-    for(const [key,file] of state.assets){
-      const already=[...packedFiles.values()].some(x=>x.file===file);
-      if(!already){
-        const ext=extOf(file.name) || ".bin";
-        const internalName="asset_"+String(seq++).padStart(3,"0")+ext;
-        packedFiles.set(internalName,{file,internalName});
-      }
-    }
-
-    const h5pJson={
-      title,
-      language:"vi",
-      mainLibrary:"H5P.ThanhtaHtmlMediaFile",
-      embedTypes:["div"],
-      preloadedDependencies:[
-        {machineName:"H5P.ThanhtaHtmlMediaFile",majorVersion:1,minorVersion:0}
-      ]
-    };
-
-    const contentJson={
-      title,
-      htmlBase64:utf8ToBase64(htmlText),
-      assets
-    };
-
-    const enc=new TextEncoder();
-    const entries=[];
-    const addText=(name,text)=>entries.push({name,bytes:enc.encode(text)});
-
-    addText("h5p.json",JSON.stringify(h5pJson,null,2));
-    addText("content/content.json",JSON.stringify(contentJson));
-    addText("H5P.ThanhtaHtmlMediaFile-1.0/library.json",JSON.stringify(libraryJson,null,2));
-    addText("H5P.ThanhtaHtmlMediaFile-1.0/semantics.json",JSON.stringify(semanticsJson,null,2));
-    addText("H5P.ThanhtaHtmlMediaFile-1.0/runner.js",runnerJs);
-    addText("H5P.ThanhtaHtmlMediaFile-1.0/runner.css",runnerCss);
-
-    for(const [internalName,obj] of packedFiles){
-      entries.push({
-        name:"content/"+internalName,
-        bytes:new Uint8Array(await obj.file.arrayBuffer())
-      });
-    }
-
-    const blob=await makeZip(entries);
-    const fname=safeTitle(title)+".h5p";
-    downloadBlob(blob,fname);
-
-    setStatus("Tải file .H5P thành công","ok");
+    setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},1500);
   }catch(err){
-    setStatus("Lỗi: "+escapeHtml(err.message||String(err)),"err");
+    setStatus("Không tạo được H5P: "+err.message,"err");
   }finally{
-    updateUI();
+    button.disabled=false;button.textContent="TẠO FILE H5P";
   }
 });
 </script>
